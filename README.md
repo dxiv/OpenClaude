@@ -102,7 +102,7 @@ Beginner-friendly:
 Advanced / source build:
 
 - [Advanced setup](docs/advanced-setup.md) — Bun, profiles, `doctor:*`, env table
-- [.env.example](.env.example) — copy to `.env` for a local clone; uncomment **one** provider block (see file header)
+- **[.env.example](.env.example)** — template in git; copy to **`.env`** for a local clone, uncomment **one** provider block (see file header)
 - [Android (Termux)](ANDROID_INSTALL.md) — build inside proot Ubuntu
 
 **Optional:** [`python/`](python/) — small Python helpers for experiments; not required for normal CLI install ([`python/README.md`](python/README.md)).
@@ -111,7 +111,7 @@ Advanced / source build:
 
 | Provider | Setup Path | Notes |
 | --- | --- | --- |
-| Anthropic (Claude) | `/provider` or env vars | Cloud default path; `ANTHROPIC_API_KEY` — template in [.env.example](.env.example) |
+| Anthropic (Claude) | `/provider` or env vars | Cloud default path; set `ANTHROPIC_API_KEY` in **`.env`** (layout in [.env.example](.env.example)) |
 | OpenAI-compatible | `/provider` or env vars | Works with OpenAI, OpenRouter, DeepSeek, Groq, Mistral, LM Studio, and other compatible `/v1` servers |
 | Gemini | `/provider` or env vars | Supports API key, access token, or local ADC workflow on current `main` |
 | GitHub Models | `/onboard-github` | Interactive onboarding with saved credentials |
@@ -203,7 +203,7 @@ bun run build
 node dist/cli.mjs
 ```
 
-From a clone: copy **[.env.example](.env.example)** to `.env`, uncomment one provider block, fill in real values (the file header walks through it).
+From a clone: create **`.env`** from [**`.env.example`**](.env.example), uncomment one provider block, put real values in **`.env`** (the example file header explains the fields).
 
 **Bun** is what the repo scripts expect. Common commands:
 
@@ -279,10 +279,12 @@ flowchart TB
     M2[vscode-extension/]
     M3[python/]
     M4[.github/]
-    M5[.env.example]
+    M5[.env]
   end
   AGENT --> OUT
 ```
+
+**`.env`** is what you edit on your machine (gitignored). [**`.env.example`**](.env.example) is only the checked-in template — copy it to `.env` once, then change **`.env`**, not the example file.
 
 **Clone vs npm install**
 
@@ -331,7 +333,8 @@ flowchart LR
 #### Repository / CI
 
 - **`.github/`** — [PR checks](.github/workflows/pr-checks.yml), `v*` [release artefacts](.github/workflows/release-artifacts.yml), Dependabot, issue/PR templates
-- **`.env.example`** — Provider env template; copy to `.env` for local development
+- **`.env`** — Your provider keys when working from a clone (gitignored). Duplicate `.env.example` to `.env`, then edit **`.env`** only (`cp .env.example .env` on Unix; `Copy-Item .env.example .env` in PowerShell).
+- **`.env.example`** — Reference template in the repo; do not put secrets here.
 - **Root** — `CONTRIBUTING.md`, `CHANGELOG.md`, `LEGAL.md`, `LICENSE`, `SECURITY.md`
 
 ## VS Code extension
