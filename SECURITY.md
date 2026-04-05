@@ -1,9 +1,8 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported versions
 
-DXA Agent is currently maintained on the latest `main` branch and the latest
-npm release only.
+Security fixes target the latest **`main`** branch and the latest **`@dxiv/dxa-agent`** npm release.
 
 | Version | Supported |
 | ------- | --------- |

@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an improvement or new capability for DXA Agent
+about: Suggest an improvement or new capability
 title: ""
 labels: ""
 assignees: ""
@@ -8,7 +8,7 @@ assignees: ""
 
 ## Summary
 
-What would you like DXA Agent to do?
+What should DXA Agent do differently?
 
 ## Problem
 

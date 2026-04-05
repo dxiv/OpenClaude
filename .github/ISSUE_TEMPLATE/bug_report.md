@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a reproducible problem in DXA Agent
+about: Reproducible problem in DXA Agent
 title: ""
 labels: ""
 assignees: ""
@@ -8,7 +8,7 @@ assignees: ""
 
 ## Summary
 
-What is broken?
+What broke, in one or two sentences?
 
 ## Steps to Reproduce
 

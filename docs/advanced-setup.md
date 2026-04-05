@@ -1,6 +1,6 @@
-# DXA Agent Advanced Setup
+# DXA Agent advanced setup
 
-This guide is for users who want source builds, Bun workflows, provider profiles, diagnostics, or more control over runtime behavior.
+For **source builds**, **Bun** workflows, **provider profiles**, **diagnostics**, and tighter control over runtime behavior. If you only need npm install + env vars, use the [README](../README.md) quick start or [Windows](quick-start-windows.md) / [macOS / Linux](quick-start-mac-linux.md) guides.
 
 ## Install Options
 
@@ -260,3 +260,10 @@ Use `profile:codex` or `--provider codex` when you want the ChatGPT Codex backen
 For `dev:ollama`, make sure Ollama is running locally before launch.
 
 For `dev:atomic-chat`, make sure Atomic Chat is running with a model loaded before launch.
+
+## Optional Python utilities (`python/`)
+
+The [`python/`](../python/) directory contains **optional** Python modules for provider-side experiments (for example local OpenAI-compatible endpoints). They are **not** imported by the main TypeScript CLI build.
+
+- Overview: [`python/README.md`](../python/README.md)
+- Tests: `pytest python/tests -v` from the repo root (with dependencies installed)

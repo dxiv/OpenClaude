@@ -1,6 +1,6 @@
-# DXA Agent VS Code Extension
+# DXA Agent VS Code extension
 
-A practical VS Code companion for DXA Agent with a project-aware **Control Center**, predictable terminal launch behavior, and quick access to useful DXA Agent workflows.
+Companion for the **DXA Agent** CLI: **Control Center** in the activity bar, predictable terminal launches, and links to docs and your workspace profile.
 
 ## Features
 

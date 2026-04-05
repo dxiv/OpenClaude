@@ -6,9 +6,9 @@
 
 ## 1. What this repository is
 
-**DXA Agent** is an **open source** terminal coding agent: interactive prompts, tools, MCP, slash commands, and support for multiple model backends. **dxiv** and other contributors maintain it **independently** on GitHub.
+**DXA Agent** is **open source** software: a terminal coding agent with interactive prompts, tools, MCP, slash commands, and multiple model backends. **dxiv** and other contributors maintain it **independently** on GitHub.
 
-This project is **not** affiliated with, endorsed by, or sponsored by Anthropic, PBC, OpenAI, Google, GitHub, or any other model or platform vendor.
+This project is **not** affiliated with, endorsed by, or sponsored by Anthropic, PBC, OpenAI, Google, GitHub, or any other model or platform vendor. Documentation may name third-party **products or APIs** only to explain configuration or interoperability (**descriptive use**—see §4).
 
 ## 2. Copyright and your license to use this code
 
