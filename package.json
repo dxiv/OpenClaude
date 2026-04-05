@@ -77,7 +77,7 @@
     "bidi-js": "1.0.3",
     "chalk": "5.6.2",
     "chokidar": "4.0.3",
-    "cli-boxes": "3.0.0",
+    "cli-boxes": "4.0.1",
     "cli-highlight": "2.1.11",
     "code-excerpt": "4.0.0",
     "commander": "12.1.0",
