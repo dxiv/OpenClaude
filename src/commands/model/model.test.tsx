@@ -13,14 +13,23 @@ const originalEnv = {
 }
 
 function invalidateModelCommandModuleCache(): void {
-  const specs = [
+  const cache = require.cache as Record<string, unknown>
+  for (const key of Object.keys(cache)) {
+    const normalized = key.replaceAll('\\', '/')
+    if (
+      normalized.includes('/commands/model/model.') ||
+      normalized.includes('openaiModelOptionsRefresh') ||
+      normalized.includes('openaiModelDiscovery')
+    ) {
+      delete cache[key]
+    }
+  }
+  for (const spec of [
     './model.js',
-    '../../utils/model/openaiModelDiscovery.js',
-  ] as const
-  for (const spec of specs) {
+    '../../utils/model/openaiModelOptionsRefresh.js',
+  ] as const) {
     try {
-      const resolved = require.resolve(spec)
-      delete require.cache[resolved]
+      delete cache[require.resolve(spec)]
     } catch {
       // not loaded yet
     }
@@ -51,19 +60,18 @@ test('opens the model picker without awaiting local model discovery refresh', as
   delete process.env.OPENAI_API_BASE
   process.env.OPENAI_MODEL = 'qwen2.5-coder-7b-instruct'
 
-  let resolveDiscovery: (() => void) | undefined
-  const discoverOpenAICompatibleModelOptions = mock(
+  const refreshOpenAIModelOptionsCache = mock(
     () =>
-      new Promise<void>(resolve => {
-        resolveDiscovery = resolve
+      new Promise<void>(() => {
+        /* never resolves — real discovery must not block the picker */
       }),
   )
 
-  const discoverySpecifier = import.meta.resolve(
-    '../../utils/model/openaiModelDiscovery.js',
+  const refreshSpecifier = import.meta.resolve(
+    '../../utils/model/openaiModelOptionsRefresh.js',
   )
-  mock.module(discoverySpecifier, () => ({
-    discoverOpenAICompatibleModelOptions,
+  mock.module(refreshSpecifier, () => ({
+    refreshOpenAIModelOptionsCache,
   }))
 
   invalidateModelCommandModuleCache()
@@ -74,8 +82,6 @@ test('opens the model picker without awaiting local model discovery refresh', as
     new Promise(resolve => setTimeout(() => resolve('timeout'), 3000)),
   ])
 
-  resolveDiscovery?.()
-
   expect(result).not.toBe('timeout')
-  expect(discoverOpenAICompatibleModelOptions).toHaveBeenCalledTimes(1)
+  expect(refreshOpenAIModelOptionsCache).toHaveBeenCalledTimes(1)
 })
