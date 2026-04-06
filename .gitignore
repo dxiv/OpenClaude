@@ -9,3 +9,4 @@ dist/
 .openclaude-profile.json
 reports/
 coverage/
+.pytest_cache/
