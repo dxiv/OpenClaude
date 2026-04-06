@@ -1,6 +1,11 @@
 # Publish @dxa-dev/agent to GitHub Packages when a version tag is pushed.
 # Public npm remains the default for local `npm publish` (see package.json publishConfig).
 # https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
+#
+# Namespace: @dxa-dev must exist as a GitHub org or user. If the repo lives under another
+# account (e.g. dxiv), GITHUB_TOKEN cannot publish to @dxa-dev — set repo secret
+# GH_PACKAGES_TOKEN (classic PAT with write:packages) for an account that can publish
+# to the dxa-dev org. See docs/maintainers.md.
 
 name: Publish GitHub Packages
 
@@ -42,4 +47,5 @@ jobs:
       - name: Publish to GitHub Packages
         run: npm publish --registry https://npm.pkg.github.com
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Prefer GH_PACKAGES_TOKEN when the repo is not under the @dxa-dev org (see header).
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
