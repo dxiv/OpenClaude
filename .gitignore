@@ -13,3 +13,4 @@ coverage/
 tsc-errors*.txt
 .tsc-errors.log
 tsc-out.txt
+.npmrc
