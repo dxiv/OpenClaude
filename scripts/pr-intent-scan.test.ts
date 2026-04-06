@@ -118,6 +118,21 @@ describe('scanAddedLines', () => {
     expect(findings).toHaveLength(0)
   })
 
+  test('flags disallowed upstream fork branding in added lines', () => {
+    const findings = scanAddedLines([
+      line(
+        Buffer.from(
+          'U2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9HaXRsYXdiL29wZW5jbGF1ZGUgZm9yIGNvbXBhcmlzb24=',
+          'base64',
+        ).toString('utf8'),
+      ),
+    ])
+
+    expect(findings.some(finding => finding.code === 'disallowed-upstream-branding')).toBe(
+      true,
+    )
+  })
+
   test('does not flag ordinary docs links', () => {
     const findings = scanAddedLines([
       line('Read more at https://docs.github.com/en/actions'),

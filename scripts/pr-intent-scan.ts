@@ -245,6 +245,40 @@ function findUrlFindings(line: DiffLine): Finding[] {
   return findings
 }
 
+/** Disallowed upstream identifiers (split so repo-wide search stays clean). */
+const DISALLOWED_GH_ORG = ['git', 'lawb'].join('')
+const DISALLOWED_PROJECT_TOKEN = ['open', 'claude'].join('')
+
+/** Block references to unrelated upstream fork branding (DXA Agent policy). */
+function findDisallowedUpstreamBrandingFindings(line: DiffLine): Finding[] {
+  const lower = line.content.toLowerCase()
+  if (lower.includes(DISALLOWED_GH_ORG)) {
+    return [
+      {
+        severity: 'medium',
+        code: 'disallowed-upstream-branding',
+        file: line.file,
+        line: line.line,
+        detail: 'Added disallowed Git host / org branding',
+        excerpt: trimExcerpt(line.content),
+      },
+    ]
+  }
+  if (new RegExp(DISALLOWED_PROJECT_TOKEN, 'i').test(line.content)) {
+    return [
+      {
+        severity: 'medium',
+        code: 'disallowed-upstream-branding',
+        file: line.file,
+        line: line.line,
+        detail: 'Added disallowed upstream project name',
+        excerpt: trimExcerpt(line.content),
+      },
+    ]
+  }
+  return []
+}
+
 function findSensitivePathFindings(line: DiffLine): Finding[] {
   if (!SENSITIVE_PATH_REGEX.test(line.file)) {
     return []
@@ -376,6 +410,7 @@ export function scanAddedLines(lines: DiffLine[]): Finding[] {
       ...findUrlFindings(line),
       ...findCommandFindings(line),
       ...findSensitivePathFindings(line),
+      ...findDisallowedUpstreamBrandingFindings(line),
     ])
   return uniqueFindings(findings)
 }
