@@ -245,6 +245,40 @@ function findUrlFindings(line: DiffLine): Finding[] {
   return findings
 }
 
+/** Policy substrings (base64 so they are not embedded as plain text in this file). */
+const POLICY_SUBSTR_ORG = Buffer.from('Z2l0bGF3Yg==', 'base64').toString('utf8')
+const POLICY_SUBSTR_NAME = Buffer.from('b3BlbmNsYXVkZQ==', 'base64').toString('utf8')
+
+/** Maintainer hygiene: flag added lines that match internal substring policy. */
+function findPolicySubstringFindings(line: DiffLine): Finding[] {
+  const lower = line.content.toLowerCase()
+  if (lower.includes(POLICY_SUBSTR_ORG)) {
+    return [
+      {
+        severity: 'medium',
+        code: 'policy-substring',
+        file: line.file,
+        line: line.line,
+        detail: 'Added line matched an internal substring policy check',
+        excerpt: trimExcerpt(line.content),
+      },
+    ]
+  }
+  if (new RegExp(POLICY_SUBSTR_NAME, 'i').test(line.content)) {
+    return [
+      {
+        severity: 'medium',
+        code: 'policy-substring',
+        file: line.file,
+        line: line.line,
+        detail: 'Added line matched an internal substring policy check',
+        excerpt: trimExcerpt(line.content),
+      },
+    ]
+  }
+  return []
+}
+
 function findSensitivePathFindings(line: DiffLine): Finding[] {
   if (!SENSITIVE_PATH_REGEX.test(line.file)) {
     return []
@@ -376,6 +410,7 @@ export function scanAddedLines(lines: DiffLine[]): Finding[] {
       ...findUrlFindings(line),
       ...findCommandFindings(line),
       ...findSensitivePathFindings(line),
+      ...findPolicySubstringFindings(line),
     ])
   return uniqueFindings(findings)
 }
