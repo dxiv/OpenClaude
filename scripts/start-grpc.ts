@@ -1,17 +1,19 @@
 import { GrpcServer } from '../src/grpc/server.ts'
 import { init } from '../src/entrypoints/init.ts'
 
+import pkg from '../package.json' with { type: 'json' }
+
 // Polyfill MACRO which is normally injected by the bundler
 Object.assign(globalThis, {
   MACRO: {
-    VERSION: '0.1.7',
-    DISPLAY_VERSION: '0.1.7',
-    PACKAGE_URL: '@gitlawb/openclaude',
+    VERSION: pkg.version,
+    DISPLAY_VERSION: pkg.version,
+    PACKAGE_URL: pkg.name,
   }
 })
 
 async function main() {
-  console.log('Starting OpenClaude gRPC Server...')
+  console.log('Starting DXA Agent gRPC server...')
   await init()
 
   // Mirror CLI bootstrap: hydrate secure tokens and resolve provider profile

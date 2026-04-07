@@ -258,7 +258,7 @@ In a separate terminal, run:
 npm run dev:grpc:cli
 ```
 
-Note: the gRPC definitions live in `src/proto/openclaude.proto` (we’ll rename this to `dxa-agent.proto` as part of the rebrand sweep).
+Note: the gRPC definitions live in `src/proto/dxa-agent.proto`.
 
 ---
 
