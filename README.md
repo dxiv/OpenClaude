@@ -29,8 +29,7 @@
 **All docs:** [docs/README.md](docs/README.md).
 
 <p align="center">
-  <img src="![deimos demo2](https://github.com/user-attachments/assets/81566d7d-68e1-4fa3-aaa6-532b425b2a45)
-" alt="Deimos" width="50%">
+  <img src="https://github.com/user-attachments/assets/81566d7d-68e1-4fa3-aaa6-532b425b2a45" alt="Deimos" width="50%">
 </p>
 
 ---
@@ -70,15 +69,15 @@ Provider and tuning flags in docs use **`DEIMOS_*`** names (for example `DEIMOS_
 deimos
 ```
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6e250842-5ed5-4d8f-82da-06d75129bf91" alt="Deimos" width="50%">
+</p>
+
 Inside Deimos:
 
 - run `/provider` for guided provider setup and saved profiles
 - run `/onboard-github` for GitHub Models onboarding
 
-<p align="center">
-  <img src="![deimos demo](https://github.com/user-attachments/assets/6e250842-5ed5-4d8f-82da-06d75129bf91)
-" alt="Deimos" width="50%">
-</p>
 
 ### Fastest OpenAI setup
 
