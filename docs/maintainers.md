@@ -1,6 +1,6 @@
 # Deimos — notes for maintainers
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **Package:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
+**Product:** [github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/) · **Package:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 ## CI overview
 

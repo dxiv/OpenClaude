@@ -1,6 +1,6 @@
 # Deimos — terminal cheatsheet
 
-**[Deimos](https://dxa.dev/deimos/)** · **[DXA](https://dxa.dev)** · terminal-native agent
+**[Deimos](https://github.com/dxiv/dxa-deimos/)** · terminal-native agent
 
 Quick reference for the interactive `deimos` CLI. Install and first-run: **[README.md](../README.md)** (Quick start → Install).
 
@@ -59,4 +59,4 @@ Use **`/mcp`** to connect external tools and data sources. Configure servers thr
 
 ---
 
-**Deimos** · [dxa.dev/deimos/](https://dxa.dev/deimos/) · [Documentation index](README.md) · npm [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
+**Deimos** · [github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/) · [Documentation index](README.md) · npm [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)

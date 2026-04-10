@@ -1,6 +1,6 @@
 # Deimos quick start — macOS and Linux
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **npm:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
+**Product:** [github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/) · **npm:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 **Audience:** macOS or Linux users using **bash** or **zsh** in Terminal (or iTerm, etc.).
 

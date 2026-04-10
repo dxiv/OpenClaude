@@ -1,6 +1,6 @@
 # Troubleshooting — Deimos
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **Package:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli) · **Docs index:** [README.md](README.md)
+**Product:** [github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/) · **Package:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli) · **Docs index:** [README.md](README.md)
 
 ## `deimos` command not found after `npm install -g`
 

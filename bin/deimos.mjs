@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * deimos CLI — https://dxa.dev/deimos/
+ * deimos CLI — https://github.com/dxiv/dxa-deimos/
  *
  * If dist/cli.mjs exists (built), run that.
  * Otherwise, tell the user to build first or use `bun run dev`.

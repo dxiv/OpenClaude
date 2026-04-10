@@ -1,6 +1,6 @@
 # Deimos quick start — Windows
 
-**Product:** [dxa.dev/deimos/](https://dxa.dev/deimos/) · **npm:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
+**Product:** [github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/) · **npm:** [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 **Audience:** Anyone on **Windows 10/11** using **PowerShell** (not CMD unless you know how to translate commands).
 

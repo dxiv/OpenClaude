@@ -2645,7 +2645,7 @@ export function resetSentSkillNames(): void {
  * on --resume when a skill_listing attachment already exists in the
  * transcript.
  *
- * `sentSkillNames` is module-scope — process-local. Each `claude -p` spawn
+ * `sentSkillNames` is module-scope — process-local. Each `deimos -p` spawn
  * starts with an empty Map, so without this every resume re-injects the
  * full ~600-token listing even though it's already in the conversation from
  * the prior process. Shows up on every --resume; particularly loud for

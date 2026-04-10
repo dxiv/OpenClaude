@@ -1,6 +1,6 @@
 # Contributing to Deimos
 
-**[Deimos](https://dxa.dev/deimos/)** · [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos) · npm [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
+**[Deimos](https://github.com/dxiv/dxa-deimos/)** · [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos) · npm [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)
 
 Contributions are welcome. Patches are easiest to merge when they are **small, tested, and scoped to one concern**.
 

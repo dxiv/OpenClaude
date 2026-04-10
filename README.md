@@ -1,10 +1,10 @@
 # <img width="335" height="89" alt="image" src="https://github.com/user-attachments/assets/833f9e93-c7f6-4a2c-91fd-1285699bcf0b" />
 
-> **[dxa.dev/deimos/](https://dxa.dev/deimos/)** · **[npm `@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)** · **[Source @ dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)**
+> **[github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/)** · **[npm `@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli)** · **[Source @ dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)**
 
-**Deimos** takes its name from Mars’s outer moon—small, fast, and locked in orbit at the edge of the light. From **[DXA](https://dxa.dev)** it is a **terminal-native** coding agent: one `deimos` command, **multi-model routing** across pluggable backends (Anthropic, OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), a full **tool** surface, **MCP**, slash commands, **agent orchestration**, and streaming sessions built for depth work. This repository ships the **CLI**, a **VS Code extension**, and a **dark terminal theme** forged for long runs in the shell.
+**Deimos** takes its name from Mars’s outer moon—small, fast, and locked in orbit at the edge of the light. It is a **terminal-native** coding agent: one `deimos` command, **multi-model routing** across pluggable backends (Anthropic, OpenAI-compatible APIs, Gemini, GitHub Models, Ollama, Atomic Chat, and others), a full **tool** surface, **MCP**, slash commands, **agent orchestration**, and streaming sessions built for depth work. This repository ships the **CLI**, a **VS Code extension**, and a **dark terminal theme** forged for long runs in the shell.
 
-**Link hub:** **[dxa.dev/deimos/](https://dxa.dev/deimos/)** is the canonical entry—npm, GitHub, and related surfaces in one place.
+**Link hub:** **[github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/)** is the canonical entry—npm, GitHub, and related surfaces in one place.
 
 **License & marks:** [MIT](LICENSE). Third-party names and APIs appear only for interoperability and factual description. **[LEGAL.md](LEGAL.md)** sets out attribution, trademarks, and how to report concerns.
 
@@ -477,7 +477,7 @@ Telemetry-related environment variables include `DISABLE_TELEMETRY` and `DEIMOS_
 
 | Resource | URL |
 | --- | --- |
-| **Product page (link hub)** | [dxa.dev/deimos/](https://dxa.dev/deimos/) |
+| **Product page (link hub)** | [github.com/dxiv/dxa-deimos/](https://github.com/dxiv/dxa-deimos/) |
 | **This package (npm)** | [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli) |
 | **This package (GitHub Packages)** | [dxa-dev / cli](https://github.com/orgs/dxa-dev/packages/npm/package/cli) |
 | **This repository** | [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos) |

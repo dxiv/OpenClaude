@@ -309,7 +309,7 @@ function findMcpServerConnection(
   }
 
   // mcpInfo.serverName is normalized (e.g., "claude_ai_Slack"), but client.name
-  // is the original name (e.g., "dxa.dev/deimos Slack"). Normalize both for comparison.
+  // is the original name (e.g., "github.com/dxiv/dxa-deimos Slack"). Normalize both for comparison.
   return mcpClients.find(
     client => normalizeNameForMCP(client.name) === mcpInfo.serverName,
   )

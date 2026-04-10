@@ -271,6 +271,7 @@ import { DesktopUpsellStartup, shouldShowDesktopUpsellStartup } from 'src/compon
 import { usePluginInstallationStatus } from 'src/hooks/notifs/usePluginInstallationStatus.js';
 import { usePluginAutoupdateNotification } from 'src/hooks/notifs/usePluginAutoupdateNotification.js';
 import { performStartupChecks } from 'src/utils/plugins/performStartupChecks.js';
+import { shouldRunStartupChecks } from './replStartupGates.js';
 import { UserTextMessage } from 'src/components/messages/UserTextMessage.js';
 import { AwsAuthStatusBox } from '../components/AwsAuthStatusBox.js';
 import { useRateLimitWarningNotification } from 'src/hooks/notifs/useRateLimitWarningNotification.js';
@@ -822,6 +823,8 @@ export function REPL({
   const tasksV2 = useTasksV2WithCollapseEffect();
 
   // Start background plugin installations
+  const startupChecksStartedRef = useRef(false);
+  const [hasHadFirstSubmission, setHasHadFirstSubmission] = useState(false);
 
   // SECURITY: This code is guaranteed to run ONLY after the "trust this folder" dialog
   // has been confirmed by the user. The trust dialog is shown in cli.tsx (line ~387)
@@ -830,9 +833,15 @@ export function REPL({
   // This ensures that plugin installations from repository and user settings only
   // happen after explicit user consent to trust the current working directory.
   useEffect(() => {
-    if (isRemoteSession) return;
+    const shouldRun = shouldRunStartupChecks({
+      isRemoteSession,
+      hasStarted: startupChecksStartedRef.current,
+      hasHadFirstSubmission,
+    });
+    if (!shouldRun) return;
+    startupChecksStartedRef.current = true;
     void performStartupChecks(setAppState);
-  }, [setAppState, isRemoteSession]);
+  }, [setAppState, isRemoteSession, hasHadFirstSubmission]);
 
   // Allow Deimos in Chrome MCP to send prompts through MCP notifications
   // and sync permission mode changes to the Chrome extension
@@ -2310,7 +2319,7 @@ export function REPL({
 
       // When the REPL bridge is connected, also forward the sandbox
       // permission request as a can_use_tool control_request so the
-      // remote user (e.g. on dxa.dev/deimos) can approve it too.
+      // remote user (e.g. on github.com/dxiv/dxa-deimos) can approve it too.
       if (feature('BRIDGE_MODE')) {
         const bridgeCallbacks = store.getState().replBridgePermissionCallbacks;
         if (bridgeCallbacks) {
@@ -3214,6 +3223,7 @@ export function REPL({
     // Re-pin scroll to bottom on submit so the user always sees the new
     // exchange (matches OpenCode's auto-scroll behavior).
     repinScroll();
+    if (!hasHadFirstSubmission) setHasHadFirstSubmission(true);
 
     // Resume loop mode if paused
     if (feature('PROACTIVE') || feature('KAIROS')) {
@@ -3896,7 +3906,7 @@ export function REPL({
   useLogMessages(messages, messages.length === initialMessages?.length);
 
   // REPL Bridge: replicate user/assistant messages to the bridge session
-  // for remote access via dxa.dev/deimos. No-op in external builds or when not enabled.
+  // for remote access via github.com/dxiv/dxa-deimos. No-op in external builds or when not enabled.
   const {
     sendBridgeResult
   } = useReplBridge(messages, setMessages, abortControllerRef, commands, mainLoopModel);

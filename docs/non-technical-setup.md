@@ -1,6 +1,6 @@
 # Deimos setup for new users
 
-**[Deimos](https://dxa.dev/deimos/)** — terminal coding agent from **[DXA](https://dxa.dev)**. Install the published CLI [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli); no clone required for this path.
+**[Deimos](https://github.com/dxiv/dxa-deimos/)** — terminal coding agent. Install the published CLI [`@dxa-deimos/cli`](https://www.npmjs.com/package/@dxa-deimos/cli); no clone required for this path.
 
 This page is for you if you want Deimos running **without** cloning the repo or touching the source code. You will use **Node.js** (to run the installer), a **terminal** (a text window where you type commands), and an account or app from an **AI provider** (OpenAI, Ollama, etc.).
 

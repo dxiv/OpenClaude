@@ -115,7 +115,7 @@ import type { OutputStyleConfig } from './outputStyles.js'
 import { CYBER_RISK_INSTRUCTION } from './cyberRiskInstruction.js'
 
 export const DEIMOS_DOCS_MAP_URL =
-  'https://dxa.dev/deimos/docs/en/deimos_docs_map.md'
+  'https://github.com/dxiv/dxa-deimos/docs/en/deimos_docs_map.md'
 
 /**
  * Boundary marker separating static (cross-org cacheable) content from dynamic content.
@@ -766,7 +766,7 @@ export async function computeSimpleEnvInfo(
       : `The most recent Deimos model family is Deimos 4.5/4.6. Model IDs — Opus 4.6: '${CLAUDE_4_5_OR_4_6_MODEL_IDS.opus}', Sonnet 4.6: '${CLAUDE_4_5_OR_4_6_MODEL_IDS.sonnet}', Haiku 4.5: '${CLAUDE_4_5_OR_4_6_MODEL_IDS.haiku}'. When building AI applications, default to the latest and most capable Deimos models.`,
     process.env.USER_TYPE === 'ant' && isUndercover()
       ? null
-      : `Deimos is available as a CLI in the terminal, desktop app (Mac/Windows), web app (dxa.dev/deimos/code), and IDE extensions (VS Code, JetBrains).`,
+      : `Deimos is available as a CLI in the terminal, desktop app (Mac/Windows), web app (github.com/dxiv/dxa-deimos), and IDE extensions (VS Code, JetBrains).`,
     process.env.USER_TYPE === 'ant' && isUndercover()
       ? null
       : `Fast mode for Deimos uses the same ${FRONTIER_MODEL_NAME} model with faster output. It does NOT switch to a different model. It can be toggled with /fast.`,

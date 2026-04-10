@@ -1,6 +1,6 @@
 # Deimos advanced setup
 
-**[Deimos](https://dxa.dev/deimos/)** · clone: [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)
+**[Deimos](https://github.com/dxiv/dxa-deimos/)** · clone: [github.com/dxiv/dxa-deimos](https://github.com/dxiv/dxa-deimos)
 
 **Who this is for:** Developers and power users who want to **clone this repo**, use **Bun**, run **`bun run build`**, use **profile launchers** (`profile:init`, `dev:profile`), **`doctor:*` diagnostics**, or copy-paste **many provider examples**.
 

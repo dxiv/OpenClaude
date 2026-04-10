@@ -219,7 +219,7 @@ export type GlobalConfig = {
   // @deprecated - Migrated to ~/.claude/cache/changelog.md. Keep for migration support.
   cachedChangelog?: string
   mcpServers?: Record<string, McpServerConfig>
-  // Cloud (dxa.dev/deimos) MCP connectors that have successfully connected at least once.
+  // Cloud (github.com/dxiv/dxa-deimos) MCP connectors that have successfully connected at least once.
   // Used to gate "connector unavailable" / "needs auth" startup notifications:
   // a connector the user has actually used is worth flagging when it breaks,
   // but an org-configured connector that's been needs-auth since day one is
@@ -593,9 +593,9 @@ export type GlobalConfig = {
   // Keyed by provider profile id.
   openaiAdditionalModelOptionsCacheByProfile?: Record<string, ModelOption[]>
 
-  // Disk cache for /api/deimos/organizations/metrics_enabled.
+  // Disk cache for the metrics-enabled endpoint (first-party only by default).
   // Org-level settings change rarely; persisting across processes avoids a
-  // cold API call on every `claude -p` invocation.
+  // cold API call on every `deimos -p` invocation.
   metricsStatusCache?: {
     enabled: boolean
     timestamp: number

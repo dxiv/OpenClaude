@@ -1,6 +1,6 @@
 # Your first minutes in Deimos
 
-**[Deimos](https://dxa.dev/deimos/)** · Daily reference: [Cheatsheet](CHEATSHEET.md)
+**[Deimos](https://github.com/dxiv/dxa-deimos/)** · Daily reference: [Cheatsheet](CHEATSHEET.md)
 
 You already ran `deimos` from a terminal and see the **interactive UI**. This page explains what to do next, in plain language.
 
