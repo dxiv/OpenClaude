@@ -66,6 +66,56 @@ describe('microCompact MCP tool compaction', () => {
     expect(mod.evaluateTimeBasedTrigger).toBeFunction()
   })
 
+  test('estimateMessageTokens matches string vs text-array tool_result', async () => {
+    const { estimateMessageTokens } = await import('./microCompact.js')
+
+    const stringForm: Message[] = [
+      createAssistantMessage({
+        content: [
+          {
+            type: 'tool_use' as const,
+            id: 't1',
+            name: 'Read',
+            input: {},
+          },
+        ],
+      }),
+      createUserMessage({
+        content: [
+          {
+            type: 'tool_result' as const,
+            tool_use_id: 't1',
+            content: 'same payload',
+          },
+        ],
+      }),
+    ]
+
+    const arrayForm: Message[] = [
+      createAssistantMessage({
+        content: [
+          {
+            type: 'tool_use' as const,
+            id: 't2',
+            name: 'Read',
+            input: {},
+          },
+        ],
+      }),
+      createUserMessage({
+        content: [
+          {
+            type: 'tool_result' as const,
+            tool_use_id: 't2',
+            content: [{ type: 'text' as const, text: 'same payload' }],
+          },
+        ],
+      }),
+    ]
+
+    expect(estimateMessageTokens(stringForm)).toBe(estimateMessageTokens(arrayForm))
+  })
+
   test('estimateMessageTokens counts MCP tool_use blocks', async () => {
     const { estimateMessageTokens } = await import('./microCompact.js')
 
