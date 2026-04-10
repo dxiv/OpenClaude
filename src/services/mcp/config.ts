@@ -1,4 +1,5 @@
 import { feature } from 'bun:bundle'
+import type { Stats } from 'fs'
 import { chmod, open, rename, stat, unlink } from 'fs/promises'
 import mapValues from 'lodash-es/mapValues.js'
 import memoize from 'lodash-es/memoize.js'
@@ -1448,64 +1449,24 @@ function parseMcpConfigFileContentsAndCache(params: {
   return result
 }
 
-function statMcpConfigFile(
+type McpConfigStatResult =
+  | { ok: true; mtimeMs: number }
+  | { ok: false; errors: ValidationError[] }
+
+function mcpConfigStatFromStats(
   filePath: string,
   scope: ConfigScope,
-):
-  | { ok: true; mtimeMs: number }
-  | { ok: false; errors: ValidationError[] } {
-  const fs = getFsImplementation()
-  try {
-    const st = fs.statSync(filePath)
-    if (!st.isFile()) {
-      return {
-        ok: false,
-        errors: [
-          {
-            file: filePath,
-            path: '',
-            message: `MCP config path is not a regular file: ${filePath}`,
-            suggestion: 'Use a path to a .mcp.json file',
-            mcpErrorMetadata: {
-              scope,
-              severity: 'fatal',
-            },
-          },
-        ],
-      }
-    }
-    return { ok: true, mtimeMs: Math.floor(st.mtimeMs) }
-  } catch (error: unknown) {
-    const code = getErrnoCode(error)
-    if (code === 'ENOENT') {
-      return {
-        ok: false,
-        errors: [
-          {
-            file: filePath,
-            path: '',
-            message: `MCP config file not found: ${filePath}`,
-            suggestion: 'Check that the file path is correct',
-            mcpErrorMetadata: {
-              scope,
-              severity: 'fatal',
-            },
-          },
-        ],
-      }
-    }
-    logForDebugging(
-      `MCP config stat error for ${filePath} (scope=${scope}): ${error}`,
-      { level: 'error' },
-    )
+  st: Stats,
+): McpConfigStatResult {
+  if (!st.isFile()) {
     return {
       ok: false,
       errors: [
         {
           file: filePath,
           path: '',
-          message: `Failed to access file: ${error}`,
-          suggestion: 'Check file permissions and ensure the path is valid',
+          message: `MCP config path is not a regular file: ${filePath}`,
+          suggestion: 'Use a path to a .mcp.json file',
           mcpErrorMetadata: {
             scope,
             severity: 'fatal',
@@ -1514,67 +1475,24 @@ function statMcpConfigFile(
       ],
     }
   }
+  return { ok: true, mtimeMs: Math.floor(st.mtimeMs) }
 }
 
-async function statMcpConfigFileAsync(
+function mcpConfigStatFromCatch(
   filePath: string,
   scope: ConfigScope,
-): Promise<
-  | { ok: true; mtimeMs: number }
-  | { ok: false; errors: ValidationError[] }
-> {
-  const fs = getFsImplementation()
-  try {
-    const st = await fs.stat(filePath)
-    if (!st.isFile()) {
-      return {
-        ok: false,
-        errors: [
-          {
-            file: filePath,
-            path: '',
-            message: `MCP config path is not a regular file: ${filePath}`,
-            suggestion: 'Use a path to a .mcp.json file',
-            mcpErrorMetadata: {
-              scope,
-              severity: 'fatal',
-            },
-          },
-        ],
-      }
-    }
-    return { ok: true, mtimeMs: Math.floor(st.mtimeMs) }
-  } catch (error: unknown) {
-    const code = getErrnoCode(error)
-    if (code === 'ENOENT') {
-      return {
-        ok: false,
-        errors: [
-          {
-            file: filePath,
-            path: '',
-            message: `MCP config file not found: ${filePath}`,
-            suggestion: 'Check that the file path is correct',
-            mcpErrorMetadata: {
-              scope,
-              severity: 'fatal',
-            },
-          },
-        ],
-      }
-    }
-    logForDebugging(
-      `MCP config stat error for ${filePath} (scope=${scope}): ${error}`,
-      { level: 'error' },
-    )
+  error: unknown,
+): McpConfigStatResult {
+  const code = getErrnoCode(error)
+  if (code === 'ENOENT') {
     return {
       ok: false,
       errors: [
         {
           file: filePath,
           path: '',
-          message: `Failed to access file: ${error}`,
-          suggestion: 'Check file permissions and ensure the path is valid',
+          message: `MCP config file not found: ${filePath}`,
+          suggestion: 'Check that the file path is correct',
           mcpErrorMetadata: {
             scope,
             severity: 'fatal',
@@ -1582,6 +1500,51 @@ async function statMcpConfigFileAsync(
         },
       ],
     }
+  }
+  logForDebugging(
+    `MCP config stat error for ${filePath} (scope=${scope}): ${error}`,
+    { level: 'error' },
+  )
+  return {
+    ok: false,
+    errors: [
+      {
+        file: filePath,
+        path: '',
+        message: `Failed to access file: ${error}`,
+        suggestion: 'Check file permissions and ensure the path is valid',
+        mcpErrorMetadata: {
+          scope,
+          severity: 'fatal',
+        },
+      },
+    ],
+  }
+}
+
+function statMcpConfigFile(
+  filePath: string,
+  scope: ConfigScope,
+): McpConfigStatResult {
+  const fs = getFsImplementation()
+  try {
+    const st = fs.statSync(filePath)
+    return mcpConfigStatFromStats(filePath, scope, st)
+  } catch (error: unknown) {
+    return mcpConfigStatFromCatch(filePath, scope, error)
+  }
+}
+
+async function statMcpConfigFileAsync(
+  filePath: string,
+  scope: ConfigScope,
+): Promise<McpConfigStatResult> {
+  const fs = getFsImplementation()
+  try {
+    const st = await fs.stat(filePath)
+    return mcpConfigStatFromStats(filePath, scope, st)
+  } catch (error: unknown) {
+    return mcpConfigStatFromCatch(filePath, scope, error)
   }
 }
 

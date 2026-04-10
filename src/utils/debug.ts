@@ -227,9 +227,16 @@ export function logForDebugging(
   getDebugWriter().write(output)
 }
 
+/**
+ * Resolved path for JSONL debug log output (when not writing to stderr).
+ * Precedence: `--debug-file` → **`DEIMOS_DEBUG_LOG_FILE`** →
+ * **`DEIMOS_DEBUG_LOGS_DIR`** (legacy name; same semantics: full path to a
+ * **file**) → default under config home.
+ */
 export function getDebugLogPath(): string {
   return (
     getDebugFilePath() ??
+    process.env.DEIMOS_DEBUG_LOG_FILE ??
     process.env.DEIMOS_DEBUG_LOGS_DIR ??
     join(getDeimosConfigHomeDir(), 'debug', `${getSessionId()}.txt`)
   )
