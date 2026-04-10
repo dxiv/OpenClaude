@@ -6,6 +6,10 @@ import { getCwd } from '../utils/cwd.js'
 import { getIsNonInteractiveSession } from '../bootstrap/state.js'
 import { getCurrentWorktreeSession } from '../utils/worktree.js'
 import { getSessionStartDate } from './common.js'
+import {
+  MCP_SERVER_INSTRUCTIONS_PREAMBLE,
+  SKILL_DISCOVERY_HEADER,
+} from './reminderCopy.js'
 import { getInitialSettings } from '../utils/settings/settings.js'
 import {
   AGENT_TOOL_NAME,
@@ -350,7 +354,7 @@ function getDiscoverSkillsGuidance(): string | null {
     feature('EXPERIMENTAL_SKILL_SEARCH') &&
     DISCOVER_SKILLS_TOOL_NAME !== null
   ) {
-    return `Relevant skills are automatically surfaced each turn as "Skills relevant to your task:" reminders. If you're about to do something those don't cover — a mid-task pivot, an unusual workflow, a multi-step plan — call ${DISCOVER_SKILLS_TOOL_NAME} with a specific description of what you're doing. Skills already visible or loaded are filtered automatically. Skip this if the surfaced skills already cover your next action.`
+    return `Relevant skills are automatically surfaced each turn as "${SKILL_DISCOVERY_HEADER}" reminders. If you're about to do something those don't cover — a mid-task pivot, an unusual workflow, a multi-step plan — call ${DISCOVER_SKILLS_TOOL_NAME} with a specific description of what you're doing. Skills already visible or loaded are filtered automatically. Skip this if the surfaced skills already cover your next action.`
   }
   return null
 }
@@ -658,11 +662,7 @@ ${client.instructions}`
     })
     .join('\n\n')
 
-  return `# MCP Server Instructions
-
-The following MCP servers have provided instructions for how to use their tools and resources:
-
-${instructionBlocks}`
+  return `${MCP_SERVER_INSTRUCTIONS_PREAMBLE}${instructionBlocks}`
 }
 
 /** Steer models away from proactive `git status` when cwd has no `.git` (avoids Bash exit 128 noise). */

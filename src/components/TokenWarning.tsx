@@ -166,10 +166,10 @@ export function TokenWarning(t0) {
     }
     return t4;
   }
-  const autocompactLabel = reactiveOnlyMode ? `${100 - displayPercentLeft}% context used` : `${displayPercentLeft}% until auto-compact`;
+  const autocompactLabel = reactiveOnlyMode ? `${100 - displayPercentLeft}% conversation input used` : `${displayPercentLeft}% of conversation input until auto-compact`;
   let t4;
   if ($[9] !== autocompactLabel || $[10] !== isAboveErrorThreshold || $[11] !== percentLeft) {
-    t4 = <Box flexDirection="row">{showAutoCompactWarning ? <Text dimColor={true} wrap="truncate">{upgradeMessage ? `${autocompactLabel} \u00b7 ${upgradeMessage}` : autocompactLabel}</Text> : <Text color={isAboveErrorThreshold ? "error" : "warning"} wrap="truncate">{upgradeMessage ? `Context low (${percentLeft}% remaining) \u00b7 ${upgradeMessage}` : `Context low (${percentLeft}% remaining) \u00b7 Run /compact to compact & continue`}</Text>}</Box>;
+    t4 = <Box flexDirection="row">{showAutoCompactWarning ? <Text dimColor={true} wrap="truncate">{upgradeMessage ? `${autocompactLabel} \u00b7 ${upgradeMessage}` : autocompactLabel}</Text> : <Text color={isAboveErrorThreshold ? "error" : "warning"} wrap="truncate">{upgradeMessage ? `Conversation input low (${percentLeft}% headroom) \u00b7 ${upgradeMessage}` : `Conversation input low (${percentLeft}% headroom) \u00b7 Run /compact to compact & continue`}</Text>}</Box>;
     $[9] = autocompactLabel;
     $[10] = isAboveErrorThreshold;
     $[11] = percentLeft;

@@ -662,6 +662,7 @@ async function* queryLoop(
         yield createAssistantAPIErrorMessage({
           content: PROMPT_TOO_LONG_ERROR_MESSAGE,
           error: 'invalid_request',
+          promptTooLongSource: 'client',
         })
         return { reason: 'blocking_limit' }
       }
